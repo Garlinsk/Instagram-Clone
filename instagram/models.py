@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 
@@ -22,6 +22,10 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'self.user, self.about,self.photo'
+
+    class Meta:
+         verbose_name = 'Profile'
+         verbose_name_plural = 'Profiles'  
 
 
 
