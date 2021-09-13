@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect,  render_to_response, HttpResponseRedirect
 from django.conf import settings
-# from .forms import NewImagePost, CreateComment, UpdateProfile
+from .forms import NewImageForm, NewCommentForm, ProfileUpdateForm
 from .models import Image, Comment, Profile, User
 import datetime as dt
 from django.http import HttpResponse, Http404
@@ -28,7 +28,6 @@ def index(request):
     else:
         form = NewCommentForm(auto_id=False)
 
-
-    return render(request, 'index.html')
+    return render(request, 'index.html', {"date": date, "images": images, "comments": comments, "form": form,})
 
 
