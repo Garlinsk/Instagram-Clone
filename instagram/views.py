@@ -1,8 +1,10 @@
-from django.shortcuts import render,redirect
-from django.http import HttpResponse, Http404, HttpResponseRedirect, JsonResponse
+from django.shortcuts import render, redirect,  render_to_response, HttpResponseRedirect
+from django.conf import settings
 # from .forms import NewImagePost, CreateComment, UpdateProfile
-from .models import Image, Comment, Profile, User, Follow
+from .models import Image, Comment, Profile, User
 import datetime as dt
+from django.http import HttpResponse, Http404
+from django.templatetags.static import static
 
 # Create your views here.
 
