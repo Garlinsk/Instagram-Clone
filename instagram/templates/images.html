@@ -1,0 +1,93 @@
+{%extends 'base.html'%}
+
+{% load bootstrap4%}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-4">
+
+
+        <div class="col-lg-6">
+
+            <!-- Card -->
+            <div class="card mt-2 pb-2 mb-2">
+                <!-- Card header -->
+                <div class="card-footer pt-1 pb-1 text-dark font-weight-bold" id="{{image.id}}">
+                    <img src="{{ image.Author.profile.photo.url }}" alt="" class="rounded-circle img-fluid mr-1"
+                        style="width: 50px;">
+                    {{image.Author}}
+                </div>
+
+                <!-- Card image -->
+                <div class="view overlay">
+                    {% if image.image_file %}
+                    <img class="card-img-top pl-1 pr-1" src="{{image.image_file.url}}"
+                        alt="{{ image_item.image_name }}">
+                    {% else %}
+                    <img class="card-img-top" src="https://source.unsplash.com/1600x900/?fun,vacation"
+                        alt="{{ image_item.image_name }}">
+                    {% endif %}
+                    <a href="/image/{{image.id}}">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+
+            </div>
+            <!-- Card -->
+
+        </div>
+
+        <div class="col-lg-6">
+
+            <!-- Card -->
+            <div class="card mt-5 pb-2 mb-2">
+
+
+                <!-- Card content -->
+                <div class="card-body">
+
+                    <!-- Title -->
+                    <p class="card-title font-weight-bold">{{ image.Author }} <span class="card-text ml-2"> {{
+                            image.description }} </span></p>
+                    <!-- Text -->
+                    <!-- <p class="card-text">{{ image.description }}</p> -->
+                    <!-- Button -->
+                    {% for comment_item in comments %}
+
+                    {% if image.pk == comment_item.image.pk%}
+                    <p> {{comment_item.author}} <span class="text-black-50"> {{comment_item.comment}} </span> </p>
+                    {% endif %}
+
+                    {% endfor %}
+
+                    <div><small class="text-black-50">{{image.pub_date|timesince}} ago</small></div>
+                </div>
+
+                <!-- Card footer -->
+                <div class="card-footer text-muted text-center">
+                    <form action="{% url 'image_results' image.pk %}" method="post" enctype="multipart/form-data">
+
+                        {%csrf_token%}
+                        <div class="form-row">
+                            <div class="col-lg-10">
+                                {% bootstrap_form form%}
+                                <input type="hidden" value="{{image.pk}}" name="image_id">
+                            </div>
+                            <div class="col-lg-2 pr-2">
+                                <button type="submit" class="btn btn-default btn-sm font-weight-bold"
+                                    value="Post">Post</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+            <!-- Card -->
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}
