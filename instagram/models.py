@@ -12,7 +12,7 @@ class Profile(models.Model):
     def save_profile(self):
         self.save()
 
-        img = Image.open(self.photo.path)
+        img = open(self.photo.path)
         if img.height > 300 or img.width > 300:
             output_size = (300, 300)
             img.thumbnail(output_size)
@@ -27,6 +27,20 @@ class Profile(models.Model):
     class Meta:
          verbose_name = 'Profile'
          verbose_name_plural = 'Profiles'  
+
+class Comment(models.Model):
+    profile =models.ForeignKey(User)
+    image =modeles.ForeignKey(Image)
+    comment = models.CharField(max_length=1000)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+	    return self.profile
+
+
+
+
+
 
 
 
