@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect, JsonResponse
-from .forms import NewImagePost, CreateComment, UpdateProfile
+# from .forms import NewImagePost, CreateComment, UpdateProfile
 from .models import Image, Comment, Profile, User, Follow
 import datetime as dt
 
