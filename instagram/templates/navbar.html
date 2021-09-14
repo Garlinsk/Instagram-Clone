@@ -40,8 +40,21 @@
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="{%url 'newsToday'%}">Home</a>
+                                        <a href="{%url 'index'%}">Home</a>
+                                        
                                     </li>
+
+                                    {% if user.is_authenticated %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{%url 'new-image'%}">Add Image</a>
+                                    </li>
+                                    {% endif %}
+                                    <!-- <li class="nav-item">
+                                              <a class="nav-link" href="#">Pricing</a>
+                                            </li>  -->
+                                    </ul>
+
+                                    
                                     <li>
                                         <a href="/accounts/password/change">Change Password</a>
                                     </li>
