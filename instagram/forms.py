@@ -24,9 +24,9 @@ class NewCommentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(NewCommentForm, self).__init__(*args, **kwargs)
         # self.helper = FormHelper()
-        self.helper.form_show_labels = False
+        # self.helper.form_show_labels = False
         self.fields['comment'].label = False
-        self.helper.show_label_comment = False
+        # self.helper.show_label_comment = False
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
@@ -48,7 +48,7 @@ class RegisterForm(RegistrationForm):
 
     def __init__(self, *args, **kwargs):
         super(RegistrationForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
+        # self.helper = FormHelper()
         for fieldname in ['username', 'password1', 'password2']:
             self.fields[fieldname].help_text = None
         self.helper.form_show_labels = True

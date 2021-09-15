@@ -3,9 +3,10 @@ from django.conf.urls import url
 from . import views
 from django.conf.urls.static import static
 
+
 urlpatterns=[
     
-    url('^$',views.index,name = 'index'),
+    url(r'^$', views.index, name='index'),
     url(r'^search/', views.search_images, name='search_results'),
     url(r'^image/(\d+)', views.get_image, name='image_results'),
     url(r'^new/image$', views.new_image, name='new-image'),

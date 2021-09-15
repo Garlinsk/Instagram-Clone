@@ -24,53 +24,33 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">
-                        <i class="fa fa-home"></i>
-                        Home
-                        <span class="sr-only">(current)</span>
-                    </a>
+                    
                     <!--The search form above-->
                     <div class="col-sm-6 col-md-6">
-                        {% if user.is_authenticated %}
+                    
                         <ul>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button"
-                                    aria-expanded="false">Account
-                                    <span class="caret"></span>
-                                </a>
+                                
                                 <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{%url 'index'%}">Home</a>
-                                        
-                                    </li>
-
-                                    {% if user.is_authenticated %}
+                                    
+<!--  -->
                                     <li class="nav-item">
                                         <a class="nav-link" href="{%url 'new-image'%}">Add Image</a>
                                     </li>
-                                    {% endif %}
+                                   
                                     <!-- <li class="nav-item">
                                               <a class="nav-link" href="#">Pricing</a>
                                             </li>  -->
                                     </ul>
 
                                     
-                                    <li>
-                                        <a href="/accounts/password/change">Change Password</a>
-                                    </li>
-                                    <li>
-                                        <a href="/logout">Logout</a>
+        
                                     </li>
                                 </ul>
                             </li>
                         </ul>
-                        {% else %}
-                <li>
-                    <a class='btn btn-default' href="/accounts/login">Login</a>
-                    <a class='btn btn-sm btn-default font-weight-bold' href="/accounts/register">Register</a>
-                </li>
-
-                {% endif %}
+                     
+                
         </div>
 
 

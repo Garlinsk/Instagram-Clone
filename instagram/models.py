@@ -35,7 +35,7 @@ class Profile(models.Model):
 class Comment(models.Model):
     comment = models.TextField(blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    # image = models.ImageField(Image, on_delete=models.CASCADE)
+    # image = models.ForeignKey(Image, on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True)
 
     def save_comment(self):

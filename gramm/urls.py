@@ -16,14 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url,include
 from django.contrib.auth import views
-from django.urls import path,re_path
+from django.urls import path
 
 
 urlpatterns = [
-    url('admin/', admin.site.urls),
-    re_path(r'^instagram/',include('instagram.urls')),
-    path(r'^accounts/', include('registration.backends.simple.urls')),
-    path(r'^logout/$', views.LogoutView, {"next_page": '/'}),
-    path(r'^tinymce/', include('tinymce.urls')),
+    path('admin/', admin.site.urls),
+    url(r'^instagram/',include('instagram.urls')),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^logout/$', views.LogoutView, {"next_page": '/'}),
+    url(r'^tinymce/', include('tinymce.urls')),
     # path(r'^accounts/register/$',RegistrationView.as_view(form_class=RegisterForm),name='registration_register',),
 ]

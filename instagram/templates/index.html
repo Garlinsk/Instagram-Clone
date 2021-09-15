@@ -1,39 +1,156 @@
+
 {%extends 'base.html'  %}
 
+{% block content %}
+{% if user.is_authenticated %}
+{{block.super}}
 
-{% for post in posts %}
-<div class="feed" style="width: 50%;box-shadow: 5px #777;border: 1px solid #777;">
-    <section class="username">
-        <div class="image">
-            {% for profile in profiles%}
-            {% if profile.user == post.author %}
-            <a href="{% url 'index' %}"><img src="{{profile.image.url}}"></a>
-            {% endif %}
+<div class="container">
+
+    <div class="row">
+        <!-- Empty div -->
+        <div class="col-lg-2"></div>
+
+        <div class="col-lg-6">
+
+            {% for image_item in images %}
+            <!-- Card -->
+            <div class="card mt-2 pb-2 mb-4 white">
+                <!-- Card header -->
+                <div class="card-footer pb-1 pt-1 text-dark font-weight-bold white">
+                    <img src="{{ image_item.Author.profile.photo.url }}" alt="" class="rounded-circle img-fluid mr-1"
+                        style="width: 50px;">
+                    {{image_item.Author}}
+
+                </div>
+
+                <!-- Card image -->
+                <div class="view overlay">
+                    {% if image_item.image_file %}
+                    <img class="card-img-top pl-1 pr-1" src="{{image_item.image_file.url}}"
+                        alt="{{ image_item.image_name }}">
+                    {% else %}
+                    <img class="card-img-top" src="https://source.unsplash.com/1600x900/?fun,vacation"
+                        alt="{{ image_item.image_name }}">
+                    {% endif %}
+                    <a href="/image/{{image_item.id}}">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+
+                <!-- Card content -->
+                <div class="card-body">
+                    <a class='info' href="#{% url 'like_image' image_item.id %}">
+                        {%if image_item.likes.id == user.id%}
+                        <i class="fas fa-heart" style="font-size:20px;" class="success"></i>
+                        {%else%}
+                        <i class="far fa-heart" style="font-size:20px;" class="success"></i>
+                        {%endif%}
+                    </a>
+
+                    <!-- End of like button -->
+                    <!-- Title -->
+                    <p class="card-title font-weight-bold" id="{{image_item.id}}">{{ image_item.Author }} <span
+                            class="card-text ml-2"> {{ image_item.description }} </span></p>
+                    <!-- Text -->
+                    <!-- <p class="card-text">{{ image_item.description }}</p> -->
+                    <!-- Button -->
+                    {% for comment_item in comments %}
+
+                    {% if image_item.pk == comment_item.image.pk%}
+                    <p> {{comment_item.author}} <span class="text-black-50"> {{comment_item.comment}} </span> </p>
+                    {% endif %}
+
+                    {% endfor %}
+
+                    <div><small class="text-black-50">{{image_item.pub_date|timesince}} ago</small></div>
+                </div>
+
+                <!-- Card footer -->
+                <div class="card-footer text-muted text-center white">
+                    <form action="{%url 'index' %}" method="post" enctype="multipart/form-data">
+
+                        {%csrf_token%}
+                        <div class="form-row">
+                            <div class="col-lg-10">
+
+                            
+
+                                <input type="hidden" value="{{image_item.pk}}" name="image_id">
+                            </div>
+                            <div class="col-lg-2 pr-2">
+                                <button type="submit" class="btn btn-default btn-sm font-weight-bold"
+                                    value="Post">Post</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+            <!-- Card -->
             {% endfor %}
-        </div>
-        <div class="id">
-            <a href="">{{post.author.username}}</a>
-        </div>
-    </section>
-    <section class="post">
-        <img src="{{post.image.url}}">
-    </section>
-    <section class="btn-group">
-        <a href="#" type="button" class="btn-love"><i class="far fa-heart fa-lg"></i></a>
-        <a href="{% url 'new_comment' %}" type="button" class="btn-comment"><i class="far fa-comment fa-lg"></i></a>
-        <a type="button" class="btn-share"><i class="fas fa-share fa-lg "></i></a>
-        <a type="button" class="btn-bookmark"><i class="far fa-bookmark fa-lg"></i></a>
-    </section>
-    <section class="caption">
-        <p class="like"> <i class="fas fa-heart"></i> 20 likes</p>
-        <p><b><a class="id" href="#">{{post.author.username}}</a></b> {{post.caption}}</p>
-        {% for comment in comments %}
-        {% if comment.post == post %}
-        <p><b><a class="id" href="#">{{comment.author}}</a></b> {{comment.body}}</p>
-        {% endif %}
-        {% endfor %}
 
-        <p class="time">5 minute ago</p>
-    </section>
+        </div>
+
+        <!-- empty div -->
+        <div class="col-lg-3 mt-2 pt-2 mr-2 pr-2 sticky">
+            <table>
+                <tr>
+                    <td> <a href="{%url 'profile'%}"> <img src="{{ user.profile.photo.url }}"
+                                alt="{{user.username}} photo" class="rounded-circle img-fluid mr-1"
+                                style="width: 60px;"></a>
+                    </td>
+                    <td class="ml-2 pl-2"><span class="font-weight-bold pl-0 ml-0"> <a
+                                href="{%url 'profile'%}">{{user.username}} </a> </span> <br>
+                        {{user.first_name}} {{user.last_name}}</td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div class="col-lg-1"></div>
+
+    </div>
 </div>
-{% endfor %}
+
+{% else %}
+
+<div style="background:url('https://source.unsplash.com/1600x900/?fun,vacation'); height: 72vh;">
+
+    <div id="intro">
+
+        <div class="mask rgba-black-strong" style="height: 80vh;">
+
+            <div class="container-fluid d-flex align-items-center justify-content-center h-50">
+
+                <div class="row d-flex justify-content-center text-center">
+
+                    <div class="col-lg-12 pt-5 mt-5">
+
+                        <!-- Heading -->
+                        <h3 class="display-4 font-weight-bold white-text pt-5">Welcome to Instagram</h3>
+
+                        <!-- Divider -->
+                        <hr class="hr-light">
+                        <a href="/accounts/login"><button type="button" class="btn btn-outline-white">Login<i
+                                    class="fa fa-book ml-2"></i></button>
+                        </a>
+                        <a href="accounts/register"><button type="button" class="btn btn-outline-white">Sign Up<i
+                                    class="fa fa-book ml-2"></i></button>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+{% endif %}
+
+{% endblock %}
