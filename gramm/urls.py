@@ -17,13 +17,15 @@ from django.contrib import admin
 from django.conf.urls import url,include
 from django.contrib.auth import views
 from django.urls import path
-
+from registration.backends.simple.views import RegistrationView
+from instagram.forms import RegisterForm
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    url(r'^instagram/',include('instagram.urls')),
+    url(r'^admin/', admin.site.urls),
+    url(r'', include('instagram.urls')),
+    url(r'^accounts/register/$',RegistrationView.as_view(form_class=RegisterForm),name='registration_register',),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^logout/$', views.LogoutView, {"next_page": '/'}),
     url(r'^tinymce/', include('tinymce.urls')),
-    # path(r'^accounts/register/$',RegistrationView.as_view(form_class=RegisterForm),name='registration_register',),
+   
 ]

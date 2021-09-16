@@ -15,51 +15,72 @@
     <!------ Include the above in your HEAD tag ---------->
 
     <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">INSTAGRAM</a>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+            <!-- Links -->
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    
-                    <!--The search form above-->
-                    <div class="col-sm-6 col-md-6">
-                    
-                        <ul>
-                            <li class="dropdown">
-                                
-                                <ul class="dropdown-menu" role="menu">
-                                    
-<!--  -->
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{%url 'new-image'%}">Add Image</a>
-                                    </li>
-                                   
-                                    <!-- <li class="nav-item">
+                <li class="text-white nav-item">
+                    <a class="nav-link" href="{% url 'index' %}">INSTAGRAM</a>
+                </li>
+
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{%url 'new-image'%}">Add Image</a>
+                </li>
+                {% endif %}
+                <!-- <li class="nav-item">
                                               <a class="nav-link" href="#">Pricing</a>
                                             </li>  -->
-                                    </ul>
+            </ul>
 
-                                    
-        
-                                    </li>
-                                </ul>
+
+            <div class="col-sm-6 col-lg-6 d-flex justify-content-end">
+                {% if user.is_authenticated %}
+                <ul>
+                    <li class="dropdown list-unstyled">
+                        <a href="#" class="dropdown-toggle btn btn-md btn-default" data-toggle="dropdown" role="button"
+                            aria-expanded="false">Account
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="{%url 'profile'%}">Profile</a>
+                            </li>
+                            <li>
+                                <a href="/accounts/password/change">Change Password</a>
+                            </li>
+                            <li>
+                                <a href="/logout">Logout</a>
                             </li>
                         </ul>
-                     
-                
+                    </li>
+                </ul>
+                {% else %}
+                <li class="list-unstyled">
+                    <a class='btn btn-sm btn-default font-weight-bold' href="/accounts/login">Login</a>
+                    <a class='btn btn-sm btn-default font-weight-bold' href="/accounts/register">Register</a>
+
+
+                </li>
+
+                {% endif %}
+            </div>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="" aria-label="Search">
+                <button class="btn btn-outline-success my-1 my-sm-0" type="submit">Search</button>
+            </form>
         </div>
 
 
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        </div>
+
+
     </nav>
 
 </body>
