@@ -13,6 +13,7 @@ from .email import send_welcome_email
 # Create your views here.
 
 
+@login_required(login_url='/accounts/login/')
 def index(request):
     date = dt.date.today()
     images = Image.get_images()
@@ -35,6 +36,7 @@ def index(request):
     return render(request, 'index.html', {"date": date, "images": images, "comments": comments, "form": form,})
 
 
+@login_required(login_url='/accounts/login/')
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
