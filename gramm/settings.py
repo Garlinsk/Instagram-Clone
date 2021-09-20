@@ -15,7 +15,7 @@ from decouple import config, Csv
 import dj_database_url
 
 MODE = config("MODE", default="dev")
-SECRET_KEY = config('SECRET_KEY')
+# SECRET_KEY = config('')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 
@@ -35,7 +35,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-u^j7viw8ia8u^=#6+!e#+1!p4)ahtvhe)%kw6_3ejej#d2tagn'
+SECRET_KEY = 'django-insecure-u^j7viw8ia8u^=#6+!e#+1!p4)ahtvhe)%kw6_3ejej#d2tagn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
