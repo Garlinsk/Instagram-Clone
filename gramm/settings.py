@@ -9,9 +9,9 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-from decouple import config, Csv
 import os
 import django_on_heroku
+from decouple import config, Csv
 import dj_database_url
 
 MODE = config("MODE", default="dev")
